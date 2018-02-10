@@ -45,16 +45,6 @@
                 },
                 {
                     "Label": {
-                        "default": "Red Hat Subscription Information"
-                    },
-                    "Parameters": [
-                        "RedhatSubscriptionUserName",
-                        "RedhatSubscriptionPassword",
-                        "RedhatSubscriptionPoolID"
-                    ]
-                },
-                {
-                    "Label": {
                         "default": "Ansible Playbook Configuration"
                     },
                     "Parameters": [
@@ -112,15 +102,6 @@
                 },
                 "OpenShiftAdminPassword": {
                     "default": "OpenShift UI Password"
-                },
-                "RedhatSubscriptionUserName": {
-                    "default": "Red Hat Subscription User Name"
-                },
-                "RedhatSubscriptionPassword": {
-                    "default": "Red Hat Subscription Password"
-                },
-                "RedhatSubscriptionPoolID": {
-                    "default": "Red Hat Pool ID"
                 },
                 "AnsiblePlaybookType": {
                     "default": "Ansible Playbook Mode"

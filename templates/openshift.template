@@ -210,7 +210,7 @@
         },
         "AnsiblePlaybookType": {
             "Description": "Note:This QuickStart only supports OpenSource-Version for Development Purposes!",
-            "Default": "Subscription-Version",
+            "Default": "OpenSource-Version",
             "AllowedValues": [
                 "Subscription-Version",
                 "OpenSource-Version"

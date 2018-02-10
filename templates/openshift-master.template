@@ -431,15 +431,6 @@
                     "OpenShiftAdminPassword": {
                         "Ref": "OpenShiftAdminPassword"
                     },
-                    "RedhatSubscriptionUserName": {
-                        "Ref": "RedhatSubscriptionUserName"
-                    },
-                    "RedhatSubscriptionPassword": {
-                        "Ref": "RedhatSubscriptionPassword"
-                    },
-                    "RedhatSubscriptionPoolID": {
-                        "Ref": "RedhatSubscriptionPoolID"
-                    },
                     "OutputBucketName": {
                         "Ref": "OutputBucketName"
                     },

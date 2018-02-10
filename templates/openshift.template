@@ -371,7 +371,8 @@
     "Mappings": {
         "AWSAMIRegionMap": {
             "AMI": {
-                "RHEL74HVM": "RHEL-7.4_HVM_GA-20170808-x86_64-2-Hourly2-GP2"
+                "RHEL74HVM": "RHEL-7.4_HVM_GA-20170808-x86_64-2-Hourly2-GP2",
+                "CENTOS7HVM": "CentOS Linux 7 x86_64 HVM EBS 1704_01"
             },
             "eu-central-1": {
                 "RHEL74HVM": "ami-d74be5b8"
@@ -386,7 +387,8 @@
                 "RHEL74HVM": "ami-c998b6b2"
             },
             "us-east-2": {
-                "RHEL74HVM": "ami-cfdafaaa"
+                "RHEL74HVM": "ami-cfdafaaa",
+                "CENTOS7HVM": "ami-0cfcdb69"
             },
             "us-west-2": {
                 "RHEL74HVM": "ami-9fa343e7"
@@ -395,6 +397,9 @@
         "LinuxAMINameMap": {
             "Redhat-Enterprise-Linux-7": {
                 "Code": "RHEL74HVM"
+            },
+            "CentOS 7": {
+                "Code": "CENTOS7HVM"
             }
         }
     },
@@ -1224,7 +1229,7 @@
                         {
                             "Ref": "AWS::Region"
                         },
-                        "RHEL74HVM"
+                        "CENTOS7HVM"
                     ]
                 },
                 "BlockDeviceMappings": [
@@ -1299,20 +1304,8 @@
                                 "echo \"\t------------------[] Completed: QuickStart Common Utils \"\n",
                                 "\n",
                                 "echo \"========================================================================================================================\"\n",
-                                "echo \"\t------------------[]Attach to Subscription pool\"\n",
-                                "SCRIPT_PATH=",
-                                {
-                                    "Fn::Sub": "s3://${QSS3BucketName}/${QSS3KeyPrefix}"
-                                },
-                                "\n",
-                                "aws s3 cp ${SCRIPT_PATH}scripts/redhat_ose-register.sh ~/redhat_ose-register.sh\n",
-                                "chmod 755 ~/redhat_ose-register.sh\n",
-                                "qs_retry_command 25 ~/redhat_ose-register.sh ",
-                                {
-                                    "Fn::Sub": "${RedhatSubscriptionUserName} ${RedhatSubscriptionPassword} ${RedhatSubscriptionPoolID} "
-                                },
-                                "\n",
-                                "echo \"========================================================================================================================\"\n",
+                                "echo \"\t------------------[] Install OpenShift Origin \"\n",
+                                "yum -y install centos-release-openshift-origin",
                                 "yum repolist | grep OpenShift \n",
                                 "# Start cfn-init [GetPublicKey, AddPublicKey]\n",
                                 "cfn-init -v ",
@@ -1327,7 +1320,7 @@
                                     "Ref": "AWS::Region"
                                 },
                                 "\n",
-                                "yum install -y atomic-openshift-docker-excluder atomic-openshift-node atomic-openshift-sdn-ovs ceph-common conntrack-tools dnsmasq docker docker-client docker-common docker-rhel-push-plugin glusterfs glusterfs-client-xlators glusterfs-fuse glusterfs-libs iptables-services iscsi-initiator-utils iscsi-initiator-utils-iscsiuio tuned-profiles-atomic-openshift-node",
+                                "yum install -y origin-docker-excluder origin-node origin-sdn-ovs ceph-common conntrack-tools dnsmasq docker docker-client docker-common glusterfs glusterfs-client-xlators glusterfs-fuse glusterfs-libs iptables-services iscsi-initiator-utils iscsi-initiator-utils-iscsiuio tuned-profiles-origin-node",
                                 "\n"
                             ]
                         ]
@@ -1406,7 +1399,7 @@
                         {
                             "Ref": "AWS::Region"
                         },
-                        "RHEL74HVM"
+                        "CENTOS7HVM"
                     ]
                 },
                 "BlockDeviceMappings": [
@@ -1489,21 +1482,8 @@
                                 "echo \"\t------------------[] Completed: QuickStart Common Utils \"\n",
                                 "\n",
                                 "echo \"========================================================================================================================\"\n",
-                                "echo \"\t------------------[]Attach to Subscription pool\"\n",
-                                "SCRIPT_PATH=",
-                                {
-                                    "Fn::Sub": "s3://${QSS3BucketName}/${QSS3KeyPrefix}"
-                                },
-                                "\n",
-                                "aws s3 cp ${SCRIPT_PATH}scripts/redhat_ose-register.sh  ~/redhat_ose-register.sh \n",
-                                "chmod 755 ~/redhat_ose-register.sh\n",
-                                "qs_retry_command 25 ~/redhat_ose-register.sh ",
-                                {
-                                    "Fn::Sub": "${RedhatSubscriptionUserName} ${RedhatSubscriptionPassword} ${RedhatSubscriptionPoolID} "
-                                },
-                                "\n",
-                                "echo \"========================================================================================================================\"\n",
-                                "\n",
+                                "echo \"\t------------------[] Install OpenShift Origin\"\n",
+                                "yum -y install centos-release-openshift-origin",
                                 "# Configure Storage\n",
                                 "yum install docker -y \n",
                                 "systemctl enable docker.service \n",
@@ -1528,7 +1508,7 @@
                                     "Ref": "AWS::Region"
                                 },
                                 "\n",
-                                "yum install -y atomic-openshift-docker-excluder atomic-openshift-node atomic-openshift-sdn-ovs ceph-common conntrack-tools dnsmasq docker docker-client docker-common docker-rhel-push-plugin glusterfs glusterfs-client-xlators glusterfs-fuse glusterfs-libs iptables-services iscsi-initiator-utils iscsi-initiator-utils-iscsiuio tuned-profiles-atomic-openshift-node",
+                                "yum install -y origin-docker-excluder origin-node origin-sdn-ovs ceph-common conntrack-tools dnsmasq docker docker-client docker-common glusterfs glusterfs-client-xlators glusterfs-fuse glusterfs-libs iptables-services iscsi-initiator-utils iscsi-initiator-utils-iscsiuio tuned-profiles-origin-node",
                                 "\n"
                             ]
                         ]
@@ -1608,7 +1588,7 @@
                         {
                             "Ref": "AWS::Region"
                         },
-                        "RHEL74HVM"
+                        "CENTOS7HVM"
                     ]
                 },
                 "BlockDeviceMappings": [
@@ -1690,21 +1670,8 @@
                                 "echo \"\t------------------[] Completed: QuickStart Common Utils \"\n",
                                 "\n",
                                 "echo \"========================================================================================================================\"\n",
-                                "echo \"\t------------------[]Attach to Subscription pool\"\n",
-                                "SCRIPT_PATH=",
-                                {
-                                    "Fn::Sub": "s3://${QSS3BucketName}/${QSS3KeyPrefix}"
-                                },
-                                "\n",
-                                "aws s3 cp ${SCRIPT_PATH}scripts/redhat_ose-register.sh  ~/redhat_ose-register.sh \n",
-                                "chmod 755 ~/redhat_ose-register.sh\n",
-                                "qs_retry_command 25 ~/redhat_ose-register.sh ",
-                                {
-                                    "Fn::Sub": "${RedhatSubscriptionUserName} ${RedhatSubscriptionPassword} ${RedhatSubscriptionPoolID} "
-                                },
-                                "\n",
-                                "echo \"========================================================================================================================\"\n",
-                                "\n",
+                                "echo \"\t------------------[] Install OpenShift Origin\"\n",
+                                "yum -y install centos-release-openshift-origin",
                                 "# Configure Storage\n",
                                 "yum install docker -y \n",
                                 "systemctl enable docker.service \n",
@@ -1729,7 +1696,7 @@
                                     "Ref": "AWS::Region"
                                 },
                                 "\n",
-                                "yum install -y atomic-openshift-docker-excluder atomic-openshift-node atomic-openshift-sdn-ovs ceph-common conntrack-tools dnsmasq docker docker-client docker-common docker-rhel-push-plugin glusterfs glusterfs-client-xlators glusterfs-fuse glusterfs-libs iptables-services iscsi-initiator-utils iscsi-initiator-utils-iscsiuio tuned-profiles-atomic-openshift-node",
+                                "yum install -y origin-docker-excluder origin-node origin-sdn-ovs ceph-common conntrack-tools dnsmasq docker docker-client docker-common glusterfs glusterfs-client-xlators glusterfs-fuse glusterfs-libs iptables-services iscsi-initiator-utils iscsi-initiator-utils-iscsiuio tuned-profiles-origin-node",
                                 "\n"
                             ]
                         ]
@@ -2051,7 +2018,7 @@
                         {
                             "Ref": "AWS::Region"
                         },
-                        "RHEL74HVM"
+                        "CENTOS7HVM"
                     ]
                 },
                 "IamInstanceProfile": {
@@ -2161,23 +2128,8 @@
                                 },
                                 "\n",
                                 "echo \"========================================================================================================================\"\n",
-                                "echo \"\t------------------[]Attach to Subscription pool\"\n",
-                                "SCRIPT_PATH=",
-                                {
-                                    "Fn::Sub": "s3://${QSS3BucketName}/${QSS3KeyPrefix}"
-                                },
-                                "\n",
-                                "aws s3 cp ${SCRIPT_PATH}scripts/redhat_ose-register.sh  ~/redhat_ose-register.sh \n",
-                                "chmod 755 ~/redhat_ose-register.sh\n",
-                                "qs_retry_command 20 ~/redhat_ose-register.sh ",
-                                {
-                                    "Fn::Sub": "${RedhatSubscriptionUserName} ${RedhatSubscriptionPassword} ${RedhatSubscriptionPoolID} "
-                                },
-                                "\n",
-                                "echo \"========================================================================================================================\"\n",
-                                "echo \"\t------------------[] Check if Subscription is Attached! if not fail Stack\"\n",
-                                "\n",
                                 "echo \" \t------------------[] Start of main execution block\"\n",
+                                "yum -y install centos-release-openshift-origin",
                                 "yum repolist | grep OpenShift \n",
                                 "if [[ $? == 0 ]] \n",
                                 "then \n",
@@ -2273,8 +2225,8 @@
                                 "#Install dependencies and update OS\n",
                                 "yum -y install wget git net-tools bind-utils iptables-services bridge-utils bash-completion kexec-tools sos psacct\n",
                                 "yum -y update \n",
-                                "yum -y install atomic-openshift-utils\n",
-                                "yum -y install atomic-openshift-excluder atomic-openshift-docker-excluder\n",
+                                "yum -y install origin-utils\n",
+                                "yum -y install origin-excluder origin-docker-excluder\n",
                                 "yum install -y https://s3-us-west-1.amazonaws.com/amazon-ssm-us-west-1/latest/linux_amd64/amazon-ssm-agent.rpm \n",
                                 "systemctl start amazon-ssm-agent \n",
                                 "systemctl enable amazon-ssm-agent \n",
@@ -2299,8 +2251,8 @@
                                 "mv openshift-ansible-* /usr/share/ansible/openshift-ansible \n",
                                 "fi",
                                 "\n",
-                                "yum -y install atomic-openshift-excluder atomic-openshift-docker-excluder\n",
-                                "atomic-openshift-excluder unexclude\n",
+                                "yum -y install origin-excluder origin-docker-excluder\n",
+                                "origin-excluder unexclude\n",
                                 "echo \"[INFO] Starting OpenShift Cluster Build (Beginning Ansible Playbook run!!!)\" \n",
                                 "date >>~/playbooks.info\n",
                                 "date >>~/playbooks.info\n",

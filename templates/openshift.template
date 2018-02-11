@@ -339,8 +339,7 @@
     "Mappings": {
         "AWSAMIRegionMap": {
             "AMI": {
-                "RHEL74HVM": "RHEL-7.4_HVM_GA-20170808-x86_64-2-Hourly2-GP2",
-                "CENTOS7HVM": "CentOS_Linux_7_x86_64_HVM_EBS_1704_01"
+                "CENTOS7HVM": "CentOS Linux 7 x86_64 HVM EBS 1704_01"
             },
             "eu-central-1": {
                 "RHEL74HVM": "ami-d74be5b8"
@@ -355,7 +354,6 @@
                 "RHEL74HVM": "ami-c998b6b2"
             },
             "us-east-2": {
-                "RHEL74HVM": "ami-cfdafaaa",
                 "CENTOS7HVM": "ami-0cfcdb69"
             },
             "us-west-2": {
@@ -363,10 +361,7 @@
             }
         },
         "LinuxAMINameMap": {
-            "Redhat-Enterprise-Linux-7": {
-                "Code": "RHEL74HVM"
-            },
-            "CentOS 7": {
+            "CentOS-7": {
                 "Code": "CENTOS7HVM"
             }
         }

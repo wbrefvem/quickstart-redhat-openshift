@@ -2101,6 +2101,11 @@
                                 "pip install boto3 &> /var/log/userdata.boto3_install.log || qs_err \" boto3 install failed \"\n",
                                 "mkdir -p /root/ose_scaling/aws_openshift_quickstart\n",
                                 "mkdir -p /root/ose_scaling/bin\n",
+                                "SCRIPT_PATH=",
+                                {
+                                    "Fn::Sub": "s3://${QSS3BucketName}/${QSS3KeyPrefix}/"
+                                },
+                                "\n",
                                 "aws s3 cp ${SCRIPT_PATH}scripts/scaling/aws_openshift_quickstart/__init__.py /root/ose_scaling/aws_openshift_quickstart/__init__.py \n",
                                 "aws s3 cp ${SCRIPT_PATH}scripts/scaling/aws_openshift_quickstart/logger.py /root/ose_scaling/aws_openshift_quickstart/logger.py \n",
                                 "aws s3 cp ${SCRIPT_PATH}scripts/scaling/aws_openshift_quickstart/scaler.py /root/ose_scaling/aws_openshift_quickstart/scaler.py \n",

@@ -2103,7 +2103,7 @@
                                 "mkdir -p /root/ose_scaling/bin\n",
                                 "SCRIPT_PATH=",
                                 {
-                                    "Fn::Sub": "s3://${QSS3BucketName}/${QSS3KeyPrefix}/"
+                                    "Fn::Sub": "s3://${QSS3BucketName}/${QSS3KeyPrefix}"
                                 },
                                 "\n",
                                 "aws s3 cp ${SCRIPT_PATH}scripts/scaling/aws_openshift_quickstart/__init__.py /root/ose_scaling/aws_openshift_quickstart/__init__.py \n",
